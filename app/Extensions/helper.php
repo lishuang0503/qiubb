@@ -1,10 +1,15 @@
 <?php
 
 use App\Constants\ErrorCode;
+use App\Model\Shop\User;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
 use Hyperf\Context\Context;
+use Hyperf\Database\Model\Collection;
+use Hyperf\Database\Model\Model;
 use Hyperf\Guzzle\ClientFactory;
+use Hyperf\HttpServer\Contract\RequestInterface;
+use Hyperf\HttpServer\Contract\ResponseInterface;
 use Hyperf\Utils\ApplicationContext;
 use Psr\SimpleCache\CacheInterface;
 
@@ -63,9 +68,9 @@ if (!function_exists('throw_if')) {
     }
 }
 if (!function_exists('auth')) {
-    function auth(): array
+    function auth(): User|Collection|Model|array|null
     {
-        return Context::get('jwt-user') ?? [];
+        return  Context::get('jwt-user') ?? [];
     }
 }
 if (!function_exists('__user')) {
@@ -90,7 +95,7 @@ if (!function_exists('user_cache_update')) {
         if ($cache->has("user-token-{$token}")) {
             $cacheUser = json_decode($cache->get("user-token-{$token}"), true) ?: [];
             $cacheUser[$key] = $value;
-            Context::set('micro-user', $cacheUser);
+            Context::set('jwt-user', $cacheUser);
             return $cache->set("user-token-{$token}", json_encode($cacheUser), 7200);
         }
         return true;
@@ -181,6 +186,33 @@ if (!function_exists('rpc_send')) {
 
         return $res;
 
+    }
+
+
+}
+
+
+if (!function_exists('request')) {
+
+    /**
+     * request 实例
+     * @return mixed
+     */
+    function request(): mixed
+    {
+        return get_container(RequestInterface::class);
+    }
+}
+
+if (!function_exists('response')) {
+
+    /**
+     * response 实例
+     * @return mixed
+     */
+    function response(): mixed
+    {
+        return get_container(ResponseInterface::class);
     }
 }
 

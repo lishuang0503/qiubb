@@ -17,9 +17,7 @@ class AuthService extends BaseService
     #[Inject]
     protected CacheInterface $cache;
 
-    /**
-     * @throws Exception
-     */
+
     public function login(mixed $code): string
     {
         //mch_id = 1604745662
@@ -33,9 +31,6 @@ class AuthService extends BaseService
         return $this->generateToken($cacheUser);
     }
 
-    /**
-     * @throws InvalidArgumentException
-     */
     protected function generateToken(array $cacheUser): string
     {
         $token = sha1(uniqid());

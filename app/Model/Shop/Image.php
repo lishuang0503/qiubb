@@ -10,4 +10,10 @@ class Image extends Model
 
     public array $visible = ['url'];
 
+
+    public function getUrlAttribute($url): string
+    {
+        return 'https://image-1255996407.cos.ap-shanghai.myqcloud.com/images'.$url;
+    }
+
 }

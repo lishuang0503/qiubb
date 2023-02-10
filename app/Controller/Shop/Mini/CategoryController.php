@@ -21,9 +21,9 @@ use Psr\Http\Message\ResponseInterface;
         return $this->success($data);
     }
 
-    public function products(): ResponseInterface
+    public function product(): ResponseInterface
     {
-        [$categoryId] = $this->params('category_id');
+        [$categoryId] = $this->params('id');
         $data = $this->categoryService->products($categoryId);
         return $this->success($data);
     }

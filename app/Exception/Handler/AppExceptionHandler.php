@@ -29,7 +29,7 @@ class AppExceptionHandler extends ExceptionHandler
     {
         $this->logger->error(sprintf('%s[%s] in %s', $throwable->getMessage(), $throwable->getLine(), $throwable->getFile()));
         $this->logger->error($throwable->getTraceAsString());
-        $message = $throwable->getMessage();
+        $message = $throwable->getMessage() . $throwable->getFile().$throwable->getLine();
         // return $this->fail($message, $throwable->getCode() ? : -9001);
         // return $response->withHeader('Server', 'Hyperf')->withStatus(500)->withBody(new SwooleStream('Internal Server Error.'));
         return $response

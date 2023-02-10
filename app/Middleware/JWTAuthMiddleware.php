@@ -32,6 +32,7 @@ class JWTAuthMiddleware implements MiddlewareInterface
         $path = $this->request->getPathInfo();
         $token = $this->request->getHeaderLine('Authorization') ?? '';
         $token = explode(' ', $token)[1] ?? '';
+        p($token);
         $needLogin = !$this->matchRoute($path, 'check_route');
         throw_if($needLogin && $token == '', ErrorCode::MISSING_TOKEN);
         if ($needLogin && $token)
@@ -41,6 +42,8 @@ class JWTAuthMiddleware implements MiddlewareInterface
             //$response = $response->withHeader('Qiu-Authorization', 0);
             Context::set(ResponseInterface::class, $response);
             // 将用户保存到上下文中
+
+            p($user);
             Context::set('jwt-user', $user);
             Context::set('jwt-user-token', $token);
         }

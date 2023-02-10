@@ -13,6 +13,8 @@
     "license": "Apache-2.0",
     "require": {
         "php": ">=8.0",
+        "ext-bcmath": "*",
+        "hyperf-plus/helper": "^3.0",
         "hyperf/async-queue": "~3.0.0",
         "hyperf/cache": "~3.0.0",
         "hyperf/command": "~3.0.0",
@@ -33,7 +35,8 @@
         "hyperf/redis": "~3.0.0",
         "hyperf/rpc": "~3.0.0",
         "hyperf/rpc-client": "~3.0.0",
-        "hyperf/rpc-server": "~3.0.0"
+        "hyperf/rpc-server": "~3.0.0",
+        "yansongda/hyperf-pay": "~1.2.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.0",

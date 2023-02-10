@@ -10,21 +10,16 @@ use Hyperf\Database\Model\Relations\HasMany;
  * @property int $id
  * @property Carbon $created_at
  * @property Carbon $updated_at
- * @property  string $openid
+ * @property  string $name
+ * @property  string $email
  */
-class User extends Model
+class Supplier extends Model
 {
-    public ?string $table = 'user';
+    public ?string $table = 'supplier';
     public array $hidden = [
         'deleted_at',
         'created_at',
         'updated_at',
     ];
-
-    //用户订单信息
-    public function orders(): HasMany
-    {
-        return $this->hasMany(Order::class,'user_id','id');
-    }
 
 }

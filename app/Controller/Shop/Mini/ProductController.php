@@ -16,7 +16,7 @@ class ProductController extends BaseController
     public ProductService $productService;
     public function detail(): ResponseInterface
     {
-        [$productId] = $this->params('product_id');
+        [$productId] = $this->params('id');
         $data = $this->productService->detail($productId);
         return $this->success($data);
     }

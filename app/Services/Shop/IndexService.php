@@ -12,10 +12,9 @@ class IndexService extends BaseService
 {
     public function banner($bannerId): array
     {
-        return Banner::query()->with([
-            'items',
-            'items.img',
-        ])->find($bannerId)->toArray();
+        return Banner::find($bannerId)->items()->with([
+            'img',
+        ])->get()->toArray();
     }
 
     public function theme(mixed $themeIds): array
@@ -30,6 +29,6 @@ class IndexService extends BaseService
 
     public function recentProduct(): array
     {
-        return Product::query()->limit(20)->orderByDesc('created_at')->get()->toArray();
+        return Product::query()->limit(100)->orderByDesc('created_at')->get()->toArray();
     }
 }
