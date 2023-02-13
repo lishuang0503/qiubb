@@ -39,8 +39,8 @@ abstract class AbstractController
             $values[] = match ($key)
             {
                 // '__user' => $this->user(),
-                'page' => $this->request->input($key, 1),
-                'pagesize' => $this->request->input($key, 20),
+                'current_page' => $this->request->input($key, 1),
+                'page_size' => $this->request->input($key, 20),
                 default => $this->request->input($key, ''),
             };
         }

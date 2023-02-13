@@ -31,4 +31,10 @@ use Psr\Http\Message\ResponseInterface;
     }
 
 
+    public function viewProduct(IndexService $indexService): ResponseInterface
+    {
+        [$themeId,$currentPage,$pageSize] = $this->params('theme_id','current_page','page_size');
+        $data = $indexService->viewProduct($themeId,$currentPage,$pageSize);
+        return $this->success($data);
+    }
 }
